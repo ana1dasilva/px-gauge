@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>px-gauge-chart Demo</title>
+    <link rel="stylesheet" type="text/css" href="css/px-gauge-chart-demo.css"/>
+    <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../px-theme/px-theme-styles.html">
+    <style include="px-theme-styles" is="custom-style"></style>
+
+    <link rel="import" href="../px-api-viewer/px-api-viewer.html"/>
+    <link rel="import" href="../px-tabs/px-tab-set.html"/>
+    <link rel="import" href="../px-dropdown/px-dropdown.html"/>
+    <link rel="import" href="px-gauge-chart.html"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+
+    <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
+    <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+</head>
+
+<body>
+
+<!-- Wrap elements with auto-binding template to -->
+<!-- allow use of Polymer bindings in main document -->
+<template id="just-for-demo" is="dom-bind">
+
+    <!-- discription -->
+    <div class="hero u-p++ text--shadow">
+        <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-gauge-chart"
+           target="_blank">
+            <iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>
+            View on Github
+        </a>
+        <h1 class="delta">px-gauge-chart</h1>
+        <p class="description-text">
+            Use this component to visualize single value between a range by radial.
+            The value is presented by color of gauge bar and position of needle.
+        </p>
+        <div class="flex">
+            <img class="u-mr-- " src="https://img.shields.io/travis/PredixDev/px-gauge-chart.svg?style=flat-square"
+                 alt="Travis" onerror="this.style.display='none'"/>
+            <img class="u-mr--" src="https://img.shields.io/bower/v/px-gauge-chart.svg?style=flat-square" alt="Bower"
+                 onerror="this.style.display='none'"/>
+            <img class="u-mr--"
+                 src="https://img.shields.io/github/issues-raw/PredixDev/px-gauge-chart.svg?style=flat-square"
+                 alt="Issues" onerror="this.style.display='none'"/>
+        </div>
+    </div>
+    <br/>
+    <!-- mega demo -->
+    <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
+        <div class="tabContainer u-pt++ u-pl++">
+            <px-tab-set selected="{{selected}}" bare no-bottom-border>
+                <template is="dom-repeat" items="{{optionsArray}}">
+                    <px-tab>Option {{indexPlusOne(index)}}</px-tab>
+                </template>
+            </px-tab-set>
+        </div>
+        <px-tab-pages selected="{{selected}}">
+            <template is="dom-repeat" items="{{optionsArray}}">
+                <section class="tab-page">
+                    <div class="mega-demo flex u-ph++ u-pb++">
+                        <!-- Properties -->
+                        <div class="properties u-ph+ u-pb+ u-mt+">
+                            <p class="epsilon">Properties</p>
+
+                            <!--<div class="u-mb-">DROPDOWN TITLE://code sample for dropdown
+                              <div style="width: 100%;">
+                                <px-dropdown id="dropdownName{{indexPlusOne(index)}}" value="{{item.dropdownName}}" display-value="{{item.dropdownName}}" bound-target="properties">
+                                  <px-dropdown-content
+                                    items='[
+                                      {"key":"one", "val": "firstVal"},
+                                      {"key":"two", "val": "SecondVal"}]'>
+                                  </px-dropdown-content>
+                                </px-dropdown>
+                              </div>
+                            </div>   //code sample for input box: -->
+
+                            <div class="u-mb-">
+                                {{item.labels.minLabel}}:
+                                <input class="text-input"
+                                       placeholder="{{item.labels.minLabel}}" value="{{item.config.min::input}}"/>
+                                {{item.labels.maxLabel}}:
+                                <input class="text-input"
+                                       placeholder="{{item.labels.maxLabel}}" value="{{item.config.max::input}}"/>
+                                {{item.labels.valueLabel}}:
+                                <input class="text-input" type="number" min="{{item.config.min}}" max="{{item.config.max}}"
+                                       placeholder="{{item.labels.valueLabel}}" value="{{item.config.value::input}}"/>
+                                {{item.labels.barWidthLabel}}:
+                                <input class="text-input" type="number"
+                                       placeholder="{{item.labels.barWidthLabel}}" value="{{item.config.barWidth::input}}"/>
+                                {{item.labels.unitLabel}}:
+                                <input class="text-input" type="text"
+                                       placeholder="{{item.labels.unitLabel}}" value="{{item.config.unit::input}}"/>
+                                {{item.labels.errorLabel}}:
+                                <input class="text-input" type="text"
+                                       placeholder="{{item.labels.errorLabel}}" value="{{item.config.error::input}}"/>
+                                {{item.labels.abnormalLabel}}:
+                                <input class="text-input" type="text"
+                                       placeholder="{{item.labels.abnormalLabel}}" value="{{item.config.abnormal::input}}"/>
+                                {{item.labels.anomalyLabel}}:
+                                <input class="text-input" type="text"
+                                       placeholder="{{item.labels.anomalyLabel}}" value="{{item.config.anomaly::input}}"/>
+                                {{item.labels.normalLabel}}:
+                                <input class="text-input" type="text"
+                                       placeholder="{{item.labels.normalLabel}}" value="{{item.config.normal::input}}"/>
+                            </div>
+                            <!--//code for boolean option
+                            <div class="flex u-mb-">
+                              <input id="booleanID{{indexPlusOne(index)}}" class="toggle__input toggle__input&#45;&#45;small" type="checkbox" checked="{{item.booleanID::change}}">
+                              <label for$="booleanID{{indexPlusOne(index)}}" class="toggle__label toggle__label&#45;&#45;small"></label>
+                              <div class="u-ml-">BOOLEAN TITLE</div>
+                            </div> -->
+
+                        </div>
+
+                        <div class="demoContainer u-mt+">
+                            <!-- demo -->
+                            <div class="flex flex--col">
+                                <div class="flex__item demo u-ph+ u-pb+">
+                                    <div class="u-mt+">
+                                        <div style="width: 50%;">
+                                            <px-gauge-chart normal="{{item.config.normal}}" anomaly="{{item.config.anomaly}}" abnormal="{{item.config.abnormal}}" error="{{item.config.error}}" max="{{item.config.max}}" min="{{item.config.min}}"
+                                                            unit="{{item.config.unit}}" value="{{item.config.value}}"
+                                                            bar-width="{{item.config.barWidth}}"
+                                                            id="gaugeChartDemo"></px-gauge-chart>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex__item">
+                                    <px-demo-snippet
+                                        element-properties={{item.config}}
+                                        element-name="px-gauge-chart"
+                                        scripts-includes="[[scriptsIncludes]]">
+                                    </px-demo-snippet>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="apiContainer">
+                        <div class="flex flex--col api u-mt++">
+                            <!--
+                            //these are optional in case the component has any children or associated components. remove this code if they don't.
+                            <div class="flex">
+                              <div class="flex__item">
+                                <div class="flex flex--col childrenAssociated">
+                                  <div class="componentHeader">Children Component</div>
+                                  <div class="componentList">
+                                    <ul>
+                                      <li><a href="demo-page.html">Demo Page</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="flex__item">
+                                <div class="flex flex--col">
+                                  <div class="componentHeader">Associated Components</div>
+                                  <div class="componentList">
+                                    <ul>
+                                      <li><a href="demo-page.html">Demo Page</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+                            <div>
+                                <px-api-viewer source="px-gauge-chart"></px-api-viewer>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </template>
+        </px-tab-pages>
+    </div>
+    <footer class="footer flex flex--center">
+        <div class="footer__container u-pv++">
+            <div>
+                <a href="https://ge.com/digital">
+                    <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
+                </a>
+            </div>
+            <div class="footer__list">
+                <ul class="list-inline list-inline--delimited">
+                    <li>
+                        <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
+                    </li>
+                    <li>Copyright &copy; 2016 General Electric Company. All rights reserved.</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</template>
+<script>
+    window.addEventListener('WebComponentsReady', function() {
+
+        var labels = {
+            "valueLabel": "Value",
+            "minLabel": "Min",
+            "maxLabel": "Max",
+            "barWidthLabel": 'Bar Width',
+            "errorLabel": 'Error Range',
+            "abnormalLabel": 'Abnormal Range',
+            "anomalyLabel": 'Anomaly Range',
+            "normalLabel": 'Normal Range',
+            "unitLabel": 'Unit'
+        };
+        var template     = document.querySelector('template[is=dom-bind]'),
+            optionsArray = [
+                {
+                    labels: labels,
+                    config: {
+                        "value": 30,
+                        "min": 0,
+                        "max": 100,
+                        "barWidth": 0,
+                        "unit": 'unit',
+                        "error": '[ [0, 12], [79, 100] ]',
+                        "abnormal": '[  [12, 32], [68, 79]  ]',
+                        "anomaly": '[ [32, 45],  [54, 68]  ]',
+                        "normal": '[ [45, 54] ]'
+                    }
+                }
+
+            ],
+            indexPlusOne = function(num) {
+                return num + 1;
+            };
+
+        template.selected = "0";
+        template.optionsArray = optionsArray;
+        template.indexPlusOne = indexPlusOne;
+
+    });
+
+</script>
+</body>
+</html>

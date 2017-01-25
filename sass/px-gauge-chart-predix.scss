@@ -1,0 +1,82 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+//
+// Sass for the Predix notion of the px-gauge-chart component
+//
+// @author
+//
+
+/*
+THIS FILE SHOULD CONTAIN ONLY RULES SPECIFIC TO PREDIX BRANDING
+common/abstract rules go in px-gauge-chart-sketch.scss, not in this file.
+*/
+
+// Settings
+@import "px-colors-design/_settings.colors.scss";
+
+@import 'px-gauge-chart-sketch.scss';
+
+// Tools
+
+// Generic
+
+// Base
+
+// Meta
+
+// Objects
+
+// Component
+
+:host {
+    --px-gauge-chart-fill-error-color: $alert-red;
+    --px-gauge-chart-fill-anomaly-color: $alert-yellow;
+    --px-gauge-chart-fill-abnormal-color: $alert-orange;
+    --px-gauge-chart-fill-normal-color: $alert-blue;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+#chart {
+    width: 100%;
+}
+
+.chart-filled {
+    fill: $gray4;
+    transition: fill 0.18s linear;
+}
+
+.chart-filled.error {
+    fill: var(--px-gauge-chart-fill-error-color);
+}
+
+.chart-filled.abnormal {
+    fill: var(--px-gauge-chart-fill-abnormal-color);
+}
+
+.chart-filled.anomaly {
+    fill: var(--px-gauge-chart-fill-anomaly-color);
+}
+
+.chart-filled.normal {
+    fill: var(--px-gauge-chart-fill-normal-color);
+}
+
+.chart-empty {
+    fill: $gray4;
+}
+
+.needle, .needle-center {
+    fill: $gray10;
+}
+
+// Trumps
