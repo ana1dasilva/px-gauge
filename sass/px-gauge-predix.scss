@@ -37,46 +37,47 @@ common/abstract rules go in px-gauge-chart-sketch.scss, not in this file.
 // Component
 
 :host {
-    --px-gauge-chart-fill-error-color: $alert-red;
-    --px-gauge-chart-fill-anomaly-color: $alert-yellow;
-    --px-gauge-chart-fill-abnormal-color: $alert-orange;
-    --px-gauge-chart-fill-normal-color: $alert-blue;
-    display: block;
-    height: 100%;
-    width: 100%;
+  --px-gauge-chart-fill-error-color: $alert-red;
+  --px-gauge-chart-fill-anomaly-color: $alert-yellow;
+  --px-gauge-chart-fill-abnormal-color: $alert-orange;
+  --px-gauge-chart-fill-normal-color: $alert-blue;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 #chart {
-    width: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .chart-filled {
-    fill: $gray4;
-    transition: fill 0.18s linear;
+  fill: $gray4;
+  transition: fill 0.18s linear;
 }
 
 .chart-filled.error {
-    fill: var(--px-gauge-chart-fill-error-color);
+  fill: var(--px-gauge-chart-fill-error-color);
 }
 
 .chart-filled.abnormal {
-    fill: var(--px-gauge-chart-fill-abnormal-color);
+  fill: var(--px-gauge-chart-fill-abnormal-color);
 }
 
 .chart-filled.anomaly {
-    fill: var(--px-gauge-chart-fill-anomaly-color);
+  fill: var(--px-gauge-chart-fill-anomaly-color);
 }
 
 .chart-filled.normal {
-    fill: var(--px-gauge-chart-fill-normal-color);
+  fill: var(--px-gauge-chart-fill-normal-color);
 }
 
 .chart-empty {
-    fill: $gray4;
+  fill: $gray4;
 }
 
 .needle, .needle-center {
-    fill: $gray10;
+  fill: $gray10;
 }
 
 // Trumps
