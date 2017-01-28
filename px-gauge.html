@@ -313,6 +313,11 @@ Custom property | Description | Default
 
       _emptyBarArc: {
         type: Object
+      },
+
+      _targetPerc: {
+        type: Number,
+        value: 0
       }
     },
 
@@ -366,10 +371,7 @@ Custom property | Description | Default
      * @return {Number} - The number will be used to calculate needle position
      */
     _computeValue: function() {
-      ['value', 'min', 'max'].forEach((function(v) {
-        this.set(v, parseFloat(this[v]));
-      }).bind(this));
-      return ((this.value - this.min) / (this.max - this.min)) || 0;
+      return ((this.value - this.min) / (this.max - this.min));
     },
 
     _computeActualBarWidth: function(barWidth, width) {
@@ -555,18 +557,28 @@ Custom property | Description | Default
     _moveTo: function(targetPerc) {
       if(this._filledBarArc && this._emptyBarArc) {
         targetPerc = targetPerc || 0;
+
         if (targetPerc > 1) return;
+
         var scale = Px.d3.scaleLinear().range([0, 1]).domain([0, 1]);
-        var oldPerc = this._targetPerc || 0;
-        this._targetPerc = targetPerc;
-        this._chart.transition().delay(100).ease(Px.d3.easeCubic).duration(800).select('.needle').tween('progress', (function() {
-          return (function(percentOfPercent) {
-            this._currentPerc = oldPerc + percentOfPercent * (targetPerc - oldPerc);
-            this.set('_valueOfProcess', (percentOfPercent == 1 ? this.value : parseInt(this.min + (this._currentPerc * (this.max - this.min)))) || 0);
-            this._repaintGauge();
-            return this._d3Select('.needle').attr('transform', "rotate(" + (this._minAngle + (scale(this._currentPerc) * this._range )) + ")");
-          }).bind(this);
-        }).bind(this));
+        var oldPerc = this._targetPerc;
+
+        this._chart.transition()
+          .delay(100)
+          .ease(Px.d3.easeCubic)
+          .duration(800)
+          .select('.needle')
+          .tween('progress', (function() {
+            return (function(percentOfPercent) {
+              this._currentPerc = oldPerc + percentOfPercent * (targetPerc - oldPerc);
+              this.set('_valueOfProcess', (percentOfPercent == 1 ? this.value : parseInt(this.min + (this._currentPerc * (this.max - this.min)))) || 0);
+              this._repaintGauge();
+              return this._d3Select('.needle').attr('transform', "rotate(" + (this._minAngle + (scale(this._currentPerc) * this._range )) + ")");
+            }).bind(this);
+          }).bind(this))
+          .on("end", function() {
+            this.set('_targetPerc', targetPerc);
+          }.bind(this));
       }
     }
   });
