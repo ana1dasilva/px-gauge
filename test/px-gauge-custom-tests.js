@@ -4,9 +4,9 @@ function runCustomTests() {
 
     // This is the placeholder suite to place custom tests in
     // Use testCase(options) for a more convenient setup of the test cases
-    suite('Custom Automation Tests for px-gauge-chart', function() {
+    suite('Custom Automation Tests for px-gauge', function() {
         test('Check initial properties of gauge chart', function(done) {
-            var el = Polymer.dom(document).querySelector('px-gauge-chart');
+            var el = Polymer.dom(document).querySelector('px-gauge');
             assert.equal(el.value, 0);
             assert.equal(el.min, 0);
             assert.equal(el.max, 100);
@@ -17,9 +17,9 @@ function runCustomTests() {
             done();
         });
 
-        test('Check text value of px-gauge-chart', function(done) {
+        test('Check text value of px-gauge', function(done) {
             setTimeout(function() {
-                var el = Polymer.dom(document).querySelector('px-gauge-chart');
+                var el = Polymer.dom(document).querySelector('px-gauge');
                 el.value = 50;
                 setTimeout(function() {
                     assert.equal(el.querySelector('.text-value').innerText, 50);
@@ -29,15 +29,15 @@ function runCustomTests() {
 
         });
 
-        test('Check unit text value of px-gauge-chart', function(done) {
-            var el = Polymer.dom(document).querySelector('px-gauge-chart');
+        test('Check unit text value of px-gauge', function(done) {
+            var el = Polymer.dom(document).querySelector('px-gauge');
             el.unit = 'Kw';
             assert.equal(el.querySelector('.text-unit').innerText, 'Kw');
             done();
         });
 
-        test('Check calculated value of px-gauge-chart', function(done) {
-            var el = Polymer.dom(document).querySelector('px-gauge-chart');
+        test('Check calculated value of px-gauge', function(done) {
+            var el = Polymer.dom(document).querySelector('px-gauge');
             el.min = 0;
             el.max = 10;
             el.value = 5;
@@ -48,7 +48,7 @@ function runCustomTests() {
         test('Check color of gauge bar by red color ranges', function(done) {
             //wait for d3 render svg
             setTimeout(function() {
-                var el = Polymer.dom(document).querySelector('px-gauge-chart');
+                var el = Polymer.dom(document).querySelector('px-gauge');
                 el.min = 0;
                 el.max = 100;
                 el.value = 80;
@@ -63,7 +63,7 @@ function runCustomTests() {
         test('Check color changing process', function(done) {
             //wait for d3 render svg
             setTimeout(function() {
-                var el = Polymer.dom(document).querySelector('px-gauge-chart');
+                var el = Polymer.dom(document).querySelector('px-gauge');
                 el.min = 0;
                 el.max = 100;
                 el.value = 80;
@@ -100,7 +100,7 @@ function runCustomTests() {
         test('Check position of Needle', function(done) {
             //wait for d3 render svg
             setTimeout(function() {
-                var el = Polymer.dom(document).querySelector('px-gauge-chart');
+                var el = Polymer.dom(document).querySelector('px-gauge');
                 el.min = 0;
                 el.max = 100;
                 el.value = 50;

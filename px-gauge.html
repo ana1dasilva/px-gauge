@@ -13,30 +13,35 @@
 Use this component to visualize single value between a range by radial.
 The value is presented by color of gauge bar and position of needle.
 This component rely on D3 version 4.
-##### Usage
 
-  Simple
+### Usage
+
+Simple
+
     <px-gauge-_chart value="10"></px-gauge-_chart>
 
-  Advance
+Advanced
+
     <px-gauge-_chart value="30"
-      max="100"
-      bar-width="0"
-      unit="unit"
-      error="[ [0, 12], [79, 100] ]"
-      abnormal="[  [12, 32], [68, 79]  ]"
-      anomaly="[ [32, 45],  [54, 68]  ]"
-      normal="[ [45, 54] ]">
+        max="100"
+        bar-width="0"
+        unit="unit"
+        error="[ [0, 12], [79, 100] ]"
+        abnormal="[  [12, 32], [68, 79]  ]"
+        anomaly="[ [32, 45],  [54, 68]  ]"
+        normal="[ [45, 54] ]">
     </px-gauge-_chart>
 
 ### Styling
   The following custom properties are available for styling.
-  Custom property | Description | Default
-  ----------------|-------------|----------
-  `--px-gauge-_chart-fill-error-color` | The color of gauge bar color in error state | `$alert-red`
-  `--px-gauge-_chart-fill-anomaly-color` | The color of gauge bar color in anomaly state | `$alert-yellow`
-  `--px-gauge-_chart-fill-abnormal-color` | The color of gauge bar color in abnormal state | `$alert-orange`
-  `--px-gauge-_chart-fill-normal-color` | The color of gauge bar color in normal state | `$alert-blue`
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--px-gauge-_chart-fill-error-color` | The color of gauge bar color in error state | `$alert-red`
+`--px-gauge-_chart-fill-anomaly-color` | The color of gauge bar color in anomaly state | `$alert-yellow`
+`--px-gauge-_chart-fill-abnormal-color` | The color of gauge bar color in abnormal state | `$alert-orange`
+`--px-gauge-_chart-fill-normal-color` | The color of gauge bar color in normal state | `$alert-blue`
+
 
 
 @element px-gauge-_chart
@@ -322,7 +327,7 @@ This component rely on D3 version 4.
     attached: function() {
       this.set('svg', Px.d3.select(this.$$('#chartSVG')));
       this.set('_chart', this.svg.select('#chartG'));
-      this._onIronResize();
+      this.notifyResize();
     },
 
     /**
@@ -333,7 +338,16 @@ This component rely on D3 version 4.
     _onIronResize: function() {
       this.debounce('ironresize', function() {
          if(!this.preventResize) {
-          wrapperRect = this.$.chart.getBoundingClientRect();
+           var wrapperRect = this.$.chart.getBoundingClientRect();
+
+          if (!wrapperRect.width) {
+            // If no height, toss this back and wait for the next animation frame
+            // to try again.
+            window.requestAnimationFrame(function() {
+              this.async(this.notifyResize, 1);
+            }.bind(this));
+            return;
+          }
 
           this.set('width', Math.max(wrapperRect.width,0));
           this.set('height', this.width/2);
@@ -520,8 +534,7 @@ This component rely on D3 version 4.
         var isMatched = false;
         var ranges = this[state];
 
-        try {
-          !(ranges instanceof Array) && (ranges = JSON.parse(ranges));
+      if(ranges) {
           for (var i = 0; i < ranges.length; i++) {
             var range = ranges[i];
             if (!isMatched) {
@@ -530,9 +543,7 @@ This component rely on D3 version 4.
             }
           }
           this._chart.select(".chart-filled").classed(state, isMatched);
-        } catch (e) {
-          console.log(e);
-        }
+      }
       }).bind(this));
     },
 

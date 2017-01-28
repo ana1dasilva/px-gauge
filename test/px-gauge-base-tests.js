@@ -184,12 +184,12 @@ function testCase(options) {
 function runBaseTests() {
   px_gauge_chart_1 = document.getElementById('px_gauge_chart_1');
 
-  suite('Base Automation Tests for px-gauge-chart', function() {
+  suite('Base Automation Tests for px-gauge', function() {
 
     test('Polymer exists', function() {
       assert.isTrue(Polymer !== null);
     });
-    test('px-gauge-chart fixture is created', function() {
+    test('px-gauge fixture is created', function() {
       assert.isTrue(document.getElementById('px_gauge_chart_1') !== null);
     });
 
