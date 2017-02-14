@@ -54,8 +54,15 @@ function runCustomTests() {
                 el.value = 80;
                 //wait for animation finished
                 setTimeout(function() {
-                    assert.equal(el.querySelector('.chart-filled').classList.contains('error'), true);
+                  var chart = el.querySelector('.chart-filled');
+                  if(el.querySelector('.chart-filled').classList) {
+                    assert.equal(chart.classList.contains('error'), true);
                     done();
+                  } else {
+                    var classes = chart.getAttribute('class').split(' ');
+                    assert.isAtLeast(classes.indexOf('error'), 0);
+                    done();
+                  }
                 }, 1000)
             }, 500);
         });
@@ -90,8 +97,16 @@ function runCustomTests() {
                     var testCase = testCases[index];
                     el.value = testCase.v;
                     setTimeout(function() {
-                        assert.equal(el.querySelector('.chart-filled').classList.contains(testCase.c), true);
-                        execute(++index);
+                      var chart = el.querySelector('.chart-filled');
+
+                      if(el.querySelector('.chart-filled').classList) {
+                        assert.equal(chart.classList.contains(testCase.c), true);
+                      } else {
+                        var classes = chart.getAttribute('class').split(' ');
+                        assert.isAtLeast(classes.indexOf(testCase.c), 0);
+                      }
+
+                      execute(++index);
                     }, 1000);
                 })(0);
             }, 500);
