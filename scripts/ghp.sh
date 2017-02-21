@@ -47,10 +47,8 @@ rm *.json
 rm *.enc
 rm *.js
 rm *.png
-rm *.lock
 rm *.ico
 rm *.md
-rm *.pdf
 yes | rm .travis.yml
 rm .bowerrc
 rm .editorconfig
