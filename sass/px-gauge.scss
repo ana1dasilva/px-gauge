@@ -8,40 +8,25 @@
  * under which the software has been supplied.
  */
 
-//
-// Sass for the Predix notion of the px-gauge component
-//
-// @author
-//
-
-/*
-THIS FILE SHOULD CONTAIN ONLY RULES SPECIFIC TO PREDIX BRANDING
-common/abstract rules go in px-gauge-sketch.scss, not in this file.
-*/
-
 // Settings
-@import "px-colors-design/_settings.colors.scss";
-
-@import 'px-gauge-sketch.scss';
-
-// Tools
 
 // Generic
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-
-// Meta
-
-// Objects
+@import "px-flexbox-design/_base.flexbox.scss";
+@import "px-viewport-design/_base.viewport.scss";
 
 // Component
 
-$error-color: var(--px-gauge-fill-error-color, $alert-red);
-$anomaly-color: var(--px-gauge-fill-anomaly-color, $alert-yellow);
-$abnormal-color: var(--px-gauge-fill-abnormal-color, $alert-orange);
-$normal-color: var(--px-gauge-fill-normal-color, $alert-blue);
-$empty-color: var(--px-gauge-empty-color, $gray4);
-$needle-color: var(--px-gauge-needle-color, $gray10);
+$error-color: var(--px-gauge-fill-error-color, red);
+$anomaly-color: var(--px-gauge-fill-anomaly-color, yellow);
+$abnormal-color: var(--px-gauge-fill-abnormal-color, orange);
+$normal-color: var(--px-gauge-fill-normal-color, blue);
+$empty-color: var(--px-gauge-empty-color, lightgray);
+$needle-color: var(--px-gauge-needle-color, black);
 
 :host {
   display: block;
@@ -84,3 +69,5 @@ $needle-color: var(--px-gauge-needle-color, $gray10);
 }
 
 // Trumps
+@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
+@import "px-widths-responsive-design/_trumps.widths-responsive.scss";
