@@ -21,9 +21,9 @@
   ],
   "dependencies": {
     "polymer": "^1.9.0",
-    "px-vis": "^2.0.0",
-    "px-d3-imports": "^1.0.0",
-    "iron-resizable-behavior": "^1.0.5"
+    "px-vis": "^3.0.0",
+    "px-d3-imports": "^2.0.0",
+    "iron-resizable-behavior": "^2.0.0"
   },
   "devDependencies": {
     "px-normalize-design": "^1.0.0",
