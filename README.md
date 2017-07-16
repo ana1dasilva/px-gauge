@@ -1,11 +1,9 @@
-#px-gauge
+# px-gauge [![Build Status](https://travis-ci.org/PredixDev/px-gauge.svg?branch=master)](https://travis-ci.org/PredixDev/px-gauge)
+-----------------------------------------------
 
 ## Overview
 
-px-gauge is a Predix UI component.
-Use this component to visualize single value between a range by radial.
-The value is presented by color of gauge bar and position of needle.
-This component rely on D3 version 4.
+The px-gauge component can be used to visualize a single value within a range by radial. The value is presented by color of gauge bar and position of needle. This component relies on D3 version 4.
 
 ## Usage
 
