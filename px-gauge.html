@@ -7,12 +7,10 @@
 <link rel="import" href="css/px-gauge-styles.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
 <link rel="import" href="../px-vis/px-vis-behavior-common.html"/>
-<link rel="import" href="../px-vis/px-vis-behavior-d3.html"/>
+<link rel="import" href="../px-d3-imports/px-d3-imports-step-one.html"/>
+<link rel="import" href="../px-d3-imports/px-d3-imports.html"/>
 
 <!--
-Use this component to visualize single value between a range by radial.
-The value is presented by color of gauge bar and position of needle.
-This component rely on D3 version 4.
 
 ### Usage
 
@@ -35,16 +33,16 @@ Advanced
 ### Styling
   The following custom properties are available for styling.
 
-Custom property | Description | Default
-----------------|-------------|----------
-`--px-gauge-fill-error-color` | The color of gauge bar color in error state | `$alert-red`
-`--px-gauge-fill-anomaly-color` | The color of gauge bar color in anomaly state | `$alert-yellow`
-`--px-gauge-fill-abnormal-color` | The color of gauge bar color in abnormal state | `$alert-orange`
-`--px-gauge-fill-normal-color` | The color of gauge bar color in normal state | `$alert-blue`
-`--px-gauge-empty-color` | The color of gauge background bar | `$grey4`
-`--px-gauge-needle-color` | The color of gauge needle | `$grey10`
+Custom property | Description
+----------------|-------------
+`--px-gauge-fill-error-color` | Color of the gauge fill in error state
+`--px-gauge-fill-anomaly-color` | Color of the gauge fill in anomaly state
+`--px-gauge-fill-abnormal-color` | Color of the gauge fill in abnormal state
+`--px-gauge-fill-normal-color` | Color of the gauge fill in normal state
+`--px-gauge-empty-color` | Color of the gauge background
+`--px-gauge-needle-color` | Color of the gauge needle
 
-@element px-gauge-chart
+@element px-gauge
 @homepage index.html
 @demo index.html
 -->

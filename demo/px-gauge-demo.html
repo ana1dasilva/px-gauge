@@ -1,6 +1,5 @@
 <!-- Common imports -->
 <link rel="import" href="../../polymer/polymer.html" />
-<link rel="import" href="../../px-polymer-font-awesome/polymer-font-awesome.html" />
 
 <!-- Common demo imports -->
 <link rel="import" href="../../px-demo/px-demo-header.html" />
@@ -13,18 +12,18 @@
 <link rel="import" href="../../px-demo/px-demo-code-editor.html" />
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
 
-<!-- Imports for this componnent -->
+<!-- Imports for this component -->
 <link rel="import" href="../px-gauge.html"/>
 
 <!-- Demo DOM module -->
-<dom-module id="local-element-demo">
+<dom-module id="px-gauge-demo">
   <template>
     <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Header -->
     <px-demo-header
         module-name="px-gauge"
-        description="The px-gauge component will visualize a single value between a range by radial. The value is presented by color of gauge bar and position of needle..">
+        description="The px-gauge component radially visualizes a single value within a range.">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -38,7 +37,7 @@
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
-        
+
         <div style="width: 400px;">
           <px-gauge normal="{{props.normal.value}}"
             anomaly="{{props.anomaly.value}}"
@@ -73,7 +72,7 @@
 </dom-module>
 <script>
   Polymer({
-    is: 'local-element-demo',
+    is: 'px-gauge-demo',
     properties: {
       /**
        * Note: The actual data/values for `props` are placed in `this.demoProps`
